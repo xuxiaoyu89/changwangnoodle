@@ -35472,8 +35472,12 @@
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(4);
+	var forms_1 = __webpack_require__(615);
 	var LoginComponent = (function () {
-	    function LoginComponent() {
+	    function LoginComponent(fb) {
+	        this.loginForm = fb.group({
+	            username: ['']
+	        });
 	    }
 	    LoginComponent.prototype.onSubmit = function (form) {
 	        console.log("you submitted a form: ", form);
@@ -35483,7 +35487,7 @@
 	            selector: "login",
 	            template: __webpack_require__(28)
 	        }), 
-	        __metadata('design:paramtypes', [])
+	        __metadata('design:paramtypes', [forms_1.FormBuilder])
 	    ], LoginComponent);
 	    return LoginComponent;
 	}());
@@ -35494,7 +35498,7 @@
 /* 28 */
 /***/ function(module, exports) {
 
-	module.exports = "<form #f = \"ngForm\" \n\t(ngSubmit)=\"onSubmit(f.value)\">\n\t<input type=\"text\" name=\"username\" placeholder=\"username\" ngModel>\n\t<button type=\"submit\">login</button>\n</form>";
+	module.exports = "<form [formGroup] = \"loginForm\" \n\t(ngSubmit)=\"onSubmit(loginForm)\">\n\t<input type=\"text\" name=\"username\" placeholder=\"username\" [formControl]=\"loginForm.controls['username']\">\n\t<button type=\"submit\">login</button>\n</form>";
 
 /***/ },
 /* 29 */
