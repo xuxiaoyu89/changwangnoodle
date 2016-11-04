@@ -2,9 +2,10 @@
   "name": "changwangnoodle.com",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,18 @@
   "bugs": {
     "url": "https://github.com/xuxiaoyu89/changwangnoodle/issues"
   },
-  "homepage": "https://github.com/xuxiaoyu89/changwangnoodle#readme"
+  "homepage": "https://github.com/xuxiaoyu89/changwangnoodle#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "core-js": "^2.4.1",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "html-loader": "^0.4.4",
+    "path": "^0.12.7",
+    "reflect-metadata": "^0.1.8",
+    "rxjs": "5.0.0-beta.12",
+    "systemjs": "0.19.39",
+    "webpack": "^1.13.3",
+    "zone.js": "^0.6.25"
+  }
 }
