@@ -1,5 +1,5 @@
-<form #f = "ngForm" 
-	(ngSubmit)="onSubmit(f.value)">
-	<input type="text" name="username" placeholder="username" ngModel>
+<form [formGroup] = "loginForm" 
+	(ngSubmit)="onSubmit(loginForm)">
+	<input type="text" name="username" placeholder="username" [formControl]="loginForm.controls['username']">
 	<button type="submit">login</button>
 </form>
