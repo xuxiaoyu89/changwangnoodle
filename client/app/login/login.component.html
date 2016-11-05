@@ -1,5 +1,8 @@
-<form #f = "ngForm" 
-	(ngSubmit)="onSubmit(f.value)">
-	<input type="text" name="username" placeholder="username" ngModel>
+<form id="login-form" [formGroup] = "loginForm" 
+	(ngSubmit)="onSubmit(loginForm)">
+	<input type="text" name="username" placeholder="username" [formControl]="loginForm.controls['username']"><br>
+	<div [hidden]="username.valid || (username.untouched && !submitted)">username required!</div>
+	<input type="text" name="password" placeholder="password" [formControl]="loginForm.controls['password']"><br>
+	<div [hidden]="password.valid || (password.untouched && !submitted)">password required!</div>
 	<button type="submit">login</button>
 </form>

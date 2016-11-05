@@ -12,6 +12,10 @@ module.exports = {
     loaders: [
       { test: /\.html$/, loader: 'html' },
       { test: /\.css$/, loader: "style!css" },
+      {
+        test: /\.scss$/,
+        loaders: ['raw', 'sass?sourceMap'] // sass-loader not scss-loader
+      },
       { test: /\.tsx?$/, loader: 'ts-loader' }
     ]
   }
