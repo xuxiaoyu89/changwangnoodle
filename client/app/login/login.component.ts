@@ -12,7 +12,8 @@ export class LoginComponent {
 
   constructor(fb: FormBuilder) {
     this.loginForm = fb.group({
-      username: ['']
+      username: [''],
+      password: ['']
     });
   }
 

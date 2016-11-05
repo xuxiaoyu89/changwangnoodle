@@ -35476,7 +35476,8 @@
 	var LoginComponent = (function () {
 	    function LoginComponent(fb) {
 	        this.loginForm = fb.group({
-	            username: ['']
+	            username: [''],
+	            password: ['']
 	        });
 	    }
 	    LoginComponent.prototype.onSubmit = function (form) {
@@ -35498,7 +35499,7 @@
 /* 28 */
 /***/ function(module, exports) {
 
-	module.exports = "<form [formGroup] = \"loginForm\" \n\t(ngSubmit)=\"onSubmit(loginForm)\">\n\t<input type=\"text\" name=\"username\" placeholder=\"username\" [formControl]=\"loginForm.controls['username']\">\n\t<button type=\"submit\">login</button>\n</form>";
+	module.exports = "<form [formGroup] = \"loginForm\" \n\t(ngSubmit)=\"onSubmit(loginForm)\">\n\t<input type=\"text\" name=\"username\" placeholder=\"username\" [formControl]=\"loginForm.controls['username']\">\n\t<input type=\"text\" name=\"password\" placeholder=\"password\" [formControl]=\"loginForm.controls['password']\">\n\t<button type=\"submit\">login</button>\n</form>";
 
 /***/ },
 /* 29 */
