@@ -3,6 +3,8 @@ var path = require('path');
 let app = express();
 let index = require('./routes/index');
 let bodyParser = require('body-parser');
+let config = require('config');
+let db = require('./models/index.js');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -20,5 +22,6 @@ app.use(bodyParser.urlencoded({
 app.use('/', index);
 
 app.listen(3000, function () {
+  db.connect();
   console.log('Example app listening on port 3000!');
 });
