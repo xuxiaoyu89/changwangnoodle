@@ -1,26 +1,34 @@
+const fs        = require('fs');
+const path      = require('path');
 const Sequelize = require('sequelize');
-const dbConfig = require('config').database;
+const basename  = path.basename(module.filename);
+const dbConfig  = require('config').database;
 
 console.log(dbConfig);
 
 let db = {};
 
 let sequelize = new Sequelize(dbConfig.DB_NAME, dbConfig.DB_USERNAME, dbConfig.DB_PASSWORD, {
-  host: '127.0.0.1',
+  host: 'localhost',
   dialect: 'mysql'
 });
 
-function connect() {
-  sequelize
-  .authenticate()
-  .then(function(err) {
-    console.log('Connection has been established successfully.');
+fs
+  .readdirSync(__dirname)
+  .filter(function(file) {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
-  .catch(function (err) {
-    console.log('Unable to connect to the database:', err);
+  .forEach(function(file) {
+    var model = sequelize.import(path.join(__dirname, file));
+    db[model.name] = model;
   });
-}
 
-module.exports = {
-  "connect": connect
-};
+Object.keys(db).forEach(function(modelName) {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+
+db.sequelize = sequelize;
+
+module.exports = db;
