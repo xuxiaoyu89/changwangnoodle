@@ -19,9 +19,11 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use('/', index);
 
 app.listen(3000, function () {
-  db.connect();
   console.log('Example app listening on port 3000!');
 });
