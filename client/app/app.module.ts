@@ -3,12 +3,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent}   from './app.component.ts';
 import {LoginComponent} from './login/login.component.ts';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   imports: [
   	BrowserModule, 
   	FormsModule,
-  	ReactiveFormsModule
+  	ReactiveFormsModule,
+    HttpModule
   ],
   declarations: [ 
   	AppComponent,
