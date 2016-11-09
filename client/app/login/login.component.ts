@@ -31,9 +31,14 @@ export class LoginComponent {
 
   onSubmit(form: any): void {
   	this.submitted = true;
-    console.log("you submitted a form: ", form);
-    console.log(this.http);
-    this.http.post('http://localhost:3000/api/login', {"test": "hello world"})
+    console.log("you submitted a form: ", form.controls.password.value);
+    let password = form.controls.password.value;
+    let username = form.controls.username.value;
+
+    this.http.post('http://localhost:3000/api/login', {
+      "username": username,
+      "password": password
+    })
     .subscribe(
       data => console.log(data),
       err => console.log(err),

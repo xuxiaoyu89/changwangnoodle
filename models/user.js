@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
   }, {
     underscored: true,
     freezeTableName: true,
-    tableName: 'video'
+    tableName: 'USER'
   });
 
   return model;
