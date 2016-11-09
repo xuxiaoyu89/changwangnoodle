@@ -40,7 +40,7 @@ export class LoginComponent {
       "password": password
     })
     .subscribe(
-      data => console.log(data),
+      data => console.log(data._body),
       err => console.log(err),
       () => console.log('Secret Quote Complete')
     );

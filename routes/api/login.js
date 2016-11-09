@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const models = require('../../models');
+const TokenService = require('../../lib/token');
 
 router.post('/login', (req, res) => {
   console.log(req.body);
@@ -12,7 +13,8 @@ router.post('/login', (req, res) => {
   .then(user => {
     data = user.dataValues;
     if (data.password == req.body.password) {
-      res.status(200).send("logged in successfully");
+      let token = TokenService.getToken();
+      res.status(200).send(token);
     } else {
       res.status(200).send("failed");
     }
