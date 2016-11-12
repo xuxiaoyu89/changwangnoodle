@@ -7,24 +7,23 @@ import {
   AbstractControl
 } from '@angular/forms';
 @Component({
-  selector: "login",
-  template: require('./login.component.html'),
-  styles: [require('./login.component.scss')],
+  selector: "signup",
+  template: require('./signup.component.html')
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class SignupComponent {
+  signupForm: FormGroup;
   username: AbstractControl;
   password: AbstractControl;
   submitted: Boolean;
   http: Http;
 
   constructor(fb: FormBuilder, http: Http) {
-    this.loginForm = fb.group({
+    this.signupForm = fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
-    this.username = this.loginForm.controls['username'];
-    this.password = this.loginForm.controls['password'];
+    this.username = this.signupForm.controls['username'];
+    this.password = this.signupForm.controls['password'];
     this.submitted = false;
     this.http = http;
   }
@@ -35,7 +34,7 @@ export class LoginComponent {
     let password = form.controls.password.value;
     let username = form.controls.username.value;
 
-    this.http.post('http://localhost:3000/api/login', {
+    this.http.post('http://localhost:3000/api/signup', {
       "username": username,
       "password": password
     })
