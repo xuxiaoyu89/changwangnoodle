@@ -3,6 +3,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent}   from './app.component.ts';
 import {LoginComponent} from './login/login.component.ts';
+import {SignupComponent} from './signup/signup.component.ts';
 import { HttpModule } from '@angular/http';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { HttpModule } from '@angular/http';
   ],
   declarations: [ 
   	AppComponent,
-  	LoginComponent
+  	LoginComponent,
+    SignupComponent
   ],
   bootstrap:    [ AppComponent ]
 })
