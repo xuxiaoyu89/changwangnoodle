@@ -5,13 +5,19 @@ import {AppComponent}   from './app.component.ts';
 import {LoginComponent} from './login/login.component.ts';
 import {SignupComponent} from './signup/signup.component.ts';
 import { HttpModule } from '@angular/http';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
   	BrowserModule, 
   	FormsModule,
   	ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      {path: 'login', component: LoginComponent},
+      {path: 'signup', component: SignupComponent},
+      {path: '', component: LoginComponent}
+    ])
   ],
   declarations: [ 
   	AppComponent,
