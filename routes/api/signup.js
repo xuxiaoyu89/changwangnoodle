@@ -9,16 +9,16 @@ router.post('/signup', (req, res) => {
     where: {
       username: req.body.username
     },
-    default: {
+    defaults: {
       password: req.body.password
     }
   }).spread((userModel, created) => {
     if(created) {
-      res.status(200).send(`user ${username} already exisits`);
-    } else {
       console.log('new user created');
       let token = TokenService.getToken();
       res.status(200).send(token);
+    } else {
+      res.status(200).send(`user ${req.body.username} already exisits`);
     }
   }).catch((err) => {
     console.log(err);
