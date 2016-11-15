@@ -7,6 +7,7 @@ import {AppComponent}   from './app.component.ts';
 import {AppRoutingModule} from './app.router.ts';
 import {LoginComponent} from './login/login.component.ts';
 import {SignupComponent} from './signup/signup.component.ts';
+import {UserListComponent} from './userlist/userlist.component.ts';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {SignupComponent} from './signup/signup.component.ts';
   declarations: [ 
   	AppComponent,
   	LoginComponent,
-    SignupComponent
+    SignupComponent,
+    UserListComponent
   ],
   bootstrap:    [ AppComponent ]
 })
