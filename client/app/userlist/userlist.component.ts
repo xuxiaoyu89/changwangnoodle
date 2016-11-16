@@ -1,14 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Http, Response} from '@angular/http';
+import {UserService} from '../user.service.ts';
 
 @Component ({
-	selector: "user-list",
-	template: require("./userlist.component.html")
+  selector: "user-list",
+  template: require("./userlist.component.html"),
+  providers: [UserService]
 })
 export class UserListComponent {
-	ids: Array<number>;
+  ids: Array<number>;
 
-	constructor() {
-		this.ids = [1,2,3,4];
-	}
+  constructor(private userServcie: UserService) {
+    this.ids;
+    userServcie.getUsers((err, data) => {
+      this.ids = JSON.parse(data).users;
+    });
+  }
 }

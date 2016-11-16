@@ -5,7 +5,7 @@ const models = require('../../models');
 router.get('/users', (req, res) => {
   models.user.findAll()
   .then(users => {
-    res.send(users);
+    res.send({users: users.map((user) => {return user.id})});
   })
 });
 
