@@ -10,7 +10,7 @@ import { UserListComponent} from './userlist/userlist.component.ts';
     RouterModule.forRoot([
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignupComponent },
-      { path: 'users', component: UserListComponent},
+      { path: 'userlist', component: UserListComponent},
       { path: '', component: LoginComponent}
     ])
   ],
