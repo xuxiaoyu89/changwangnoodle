@@ -7,7 +7,7 @@ export class UserService {
 	getUsers(callback) {
 		this.http.get('http://localhost:3000/api/users')
 		.subscribe(
-			(data) => {callback(null, data._body);},
+			(data) => {callback(null, data);},
 			(err) => {callback(err, null);},
 			() => console.log("nothing")
 		);
