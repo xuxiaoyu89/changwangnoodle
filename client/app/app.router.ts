@@ -15,10 +15,13 @@ import { UserInfoComponent} from './userinfo/userinfo.component.ts';
         path: 'userlist', 
         component: UserListComponent,
         children: [
-          { path: '', component: UserListComponent }, 
+          //{ path: '', redirectTo: 'userlist' }, 
+          { path: '', component: null},
           { path: 'user/:id', component: UserInfoComponent }
         ]
       },
+      /*{path: 'userlist', component: UserListComponent},
+      {path: 'userlist/user/:id', component: UserInfoComponent},*/
       { path: '', component: LoginComponent}
     ])
   ],
