@@ -15,7 +15,7 @@ import { UserInfoComponent} from './userinfo/userinfo.component.ts';
         path: 'userlist', 
         component: UserListComponent,
         children: [
-          //{ path: '', redirectTo: 'userlist' }, 
+          //{ path: '', redirectTo: 'user/1', pathMatch: 'full' },
           { path: '', component: null},
           { path: 'user/:id', component: UserInfoComponent }
         ]

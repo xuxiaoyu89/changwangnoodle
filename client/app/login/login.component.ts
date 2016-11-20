@@ -9,7 +9,7 @@ import {
 @Component({
   selector: "login",
   template: require('./login.component.html'),
-  styles: [require('./login.component.scss')],
+  styles: [require('./login.component.scss'), require('../shared/styles/base.scss')]
 })
 export class LoginComponent {
   loginForm: FormGroup;
