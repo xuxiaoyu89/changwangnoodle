@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Http, Response} from '@angular/http';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import {
   FormBuilder,
   FormGroup, 
@@ -18,9 +19,8 @@ export class SignupComponent {
   password: AbstractControl;
   confirm_password: AbstractControl;
   submitted: Boolean;
-  http: Http;
 
-  constructor(fb: FormBuilder, http: Http) {
+  constructor(fb: FormBuilder, public http: Http, public router: Router) {
     this.signupForm = fb.group({
       email: ['', Validators.required],
       username: ['', Validators.required],
@@ -32,7 +32,6 @@ export class SignupComponent {
     this.password = this.signupForm.controls['password'];
     this.confirm_password = this.signupForm.controls['confirm_password'];
     this.submitted = false;
-    this.http = http;
   }
 
   onSubmit(form: any): void {
@@ -40,13 +39,15 @@ export class SignupComponent {
     console.log("you submitted a form: ", form.controls.password.value);
     let password = form.controls.password.value;
     let username = form.controls.username.value;
+    let email = form.controls.email.value;
 
     this.http.post('http://localhost:3000/api/signup', {
       "username": username,
-      "password": password
+      "password": password,
+      "email": email
     })
     .subscribe(
-      data => console.log(data),
+      data => { console.log(data); this.router.navigate(['./userlist']); },
       err => console.log(err),
       () => console.log('Secret Quote Complete')
     );
