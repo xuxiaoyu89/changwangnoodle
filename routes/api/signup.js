@@ -7,10 +7,11 @@ router.post('/signup', (req, res) => {
   console.log(req.body);
   models.user.findOrCreate({
     where: {
-      username: req.body.username
+      email: req.body.email
     },
     defaults: {
-      password: req.body.password
+      password: req.body.password,
+      username: req.body.username
     }
   }).spread((userModel, created) => {
     if(created) {
