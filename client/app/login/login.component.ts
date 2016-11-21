@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import {Http, Response} from '@angular/http';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import {
   FormBuilder,
   FormGroup, 
   Validators,
   AbstractControl
 } from '@angular/forms';
+import {UserService} from '../user.service.ts';
+import {CookieService} from '../cookie.service.ts';
+
 @Component({
   selector: "login",
   template: require('./login.component.html'),
-  styles: [require('./login.component.scss'), require('../shared/styles/base.scss')]
+  styles: [require('./login.component.scss'), require('../shared/styles/base.scss')],
+  providers: [UserService, CookieService]
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -18,7 +23,12 @@ export class LoginComponent {
   submitted: Boolean;
   http: Http;
 
-  constructor(fb: FormBuilder, http: Http) {
+  constructor(
+    fb: FormBuilder, 
+    http: Http, 
+    private cookieService: CookieService,
+    private router: Router
+    ) {
     this.loginForm = fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -40,11 +50,16 @@ export class LoginComponent {
       "password": password
     })
     .subscribe(
-      data => console.log(data),
+      data => {
+        data = JSON.parse(data._body);
+        console.log(data);
+        // store the access token to cookie
+        this.cookieService.setCookie('access-token', data.accessToken, 1);
+        this.router.navigate(['./userlist/user/'+data.id]);
+      },
       err => console.log(err),
       () => console.log('Secret Quote Complete')
     );
   }
-
 
 }

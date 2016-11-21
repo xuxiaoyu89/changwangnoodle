@@ -11,6 +11,7 @@ import {SignupComponent} from './signup/signup.component.ts';
 import {UserListComponent} from './userlist/userlist.component.ts';
 import {UserInfoComponent} from './userinfo/userinfo.component.ts';
 import {UserService} from './user.service.ts';
+import {CookieService} from './cookie.service.ts';
 
 
 

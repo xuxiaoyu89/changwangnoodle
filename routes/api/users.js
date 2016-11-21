@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const models = require('../../models');
-const TokenService = require('../../lib/token.js');
 
-router.get('/user', (req, res) => {
-  // validate access token
-  let token = req.body.token;
+router.get('/users', (req, res) => {
+
+  console.log(req.get('Cookie'));
+  /*let token = req.body.token;
   if (!token) {
     res.send({
       error: "not logged in"
@@ -17,11 +17,11 @@ router.get('/user', (req, res) => {
     res.send({
       error: "not logged in"
     });
-  }
+  }*/
 
-  models.user.findById(token.id)
-  .then(user => {
-    res.send(user);
+  models.user.findAll()
+  .then(users => {
+    res.send({users: users.map((user) => {return user.id})});
   })
 });
 
