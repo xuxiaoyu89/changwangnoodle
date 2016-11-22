@@ -14,6 +14,7 @@ router.post('/login', (req, res) => {
     data = user.dataValues;
     if (data.password == req.body.password) {
       let token = TokenService.getAccessToken();
+      console.log(token);
       res.status(200).send({
         status: 'success',
         accessToken: token,

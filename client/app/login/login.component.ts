@@ -51,11 +51,9 @@ export class LoginComponent {
     })
     .subscribe(
       data => {
-        data = JSON.parse(data._body);
-        console.log(data);
-        // store the access token to cookie
-        this.cookieService.setCookie('access-token', data.accessToken, 1);
-        this.router.navigate(['./userlist/user/'+data.id]);
+        let response = JSON.parse(data.text());
+        this.cookieService.setCookie('access-token', response.accessToken, 1);
+        this.router.navigate(['./userlist/user/'+response.id]);
       },
       err => console.log(err),
       () => console.log('Secret Quote Complete')
