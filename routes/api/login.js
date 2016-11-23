@@ -4,7 +4,6 @@ const models = require('../../models');
 const TokenService = require('../../lib/token');
 
 router.post('/login', (req, res) => {
-  console.log(req.body);
   models.user.findOne({
     where: {
       "username": req.body.username
@@ -13,8 +12,7 @@ router.post('/login', (req, res) => {
   .then(user => {
     data = user.dataValues;
     if (data.password == req.body.password) {
-      let token = TokenService.getAccessToken();
-      console.log(token);
+      let token = TokenService.getAccessToken(data.id);
       res.status(200).send({
         status: 'success',
         accessToken: token,
