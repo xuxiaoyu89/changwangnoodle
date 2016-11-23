@@ -5,8 +5,6 @@ const cookieUtil = require('../../lib/util/cookie.js');
 const TokenService = require('../../lib/token.js');
 
 router.get('/users', (req, res) => {
-
-  console.log(req.get('Cookie'));
   let cookie = req.get('Cookie');
   let token = cookieUtil.getKey('access-token', cookie);
   if (!token) {
@@ -15,6 +13,7 @@ router.get('/users', (req, res) => {
     });
   } else {
     token = TokenService.verifyToken(token);
+
     if(!token) {
       res.send({
         error: "not logged in"
