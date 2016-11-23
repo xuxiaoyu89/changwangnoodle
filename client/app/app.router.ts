@@ -24,7 +24,7 @@ import { HomeComponent} from './home/home.component.ts';
       },
       /*{path: 'userlist', component: UserListComponent},
       {path: 'userlist/user/:id', component: UserInfoComponent},*/
-      { path: '', component: LoginComponent}
+      { path: '', component: HomeComponent}
     ])
   ],
   exports: [
