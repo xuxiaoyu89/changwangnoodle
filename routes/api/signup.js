@@ -4,7 +4,6 @@ const models = require('../../models');
 const TokenService = require('../../lib/token');
 
 router.post('/signup', (req, res) => {
-  console.log(req.body);
   models.user.findOrCreate({
     where: {
       email: req.body.email
@@ -16,10 +15,16 @@ router.post('/signup', (req, res) => {
   }).spread((userModel, created) => {
     if(created) {
       console.log('new user created');
-      let token = TokenService.getToken();
-      res.status(200).send(token);
+      let token = TokenService.getAccessToken();
+      res.status(200).send({
+        "status": "success",
+        "accessToken": token
+      });
     } else {
-      res.status(200).send(`user ${req.body.username} already exisits`);
+      res.status(200).send({
+        "status": "fail",
+        "error": `user ${req.body.username} already exisits`
+      });
     }
   }).catch((err) => {
     console.log(err);
