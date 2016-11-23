@@ -16,6 +16,7 @@ export class HomeComponent {
 
   constructor (userService: UserService, private router: Router) {
     userService.getUser((err, data) => {
+      console.log('home, getting user');
       if (err) {
         console.log(err);
         router.navigate(['./login'])

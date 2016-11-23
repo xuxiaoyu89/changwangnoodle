@@ -7,10 +7,14 @@ import {
   Validators,
   AbstractControl
 } from '@angular/forms';
+import {UserService} from '../user.service.ts';
+import {CookieService} from '../cookie.service.ts';
+
 @Component({
   selector: "signup",
   template: require('./signup.component.html'),
-  styles: [require('./signup.component.scss'), require('../shared/styles/base.scss')]
+  styles: [require('./signup.component.scss'), require('../shared/styles/base.scss')],
+  providers: [UserService, CookieService]
 })
 export class SignupComponent {
   signupForm: FormGroup;
@@ -20,7 +24,7 @@ export class SignupComponent {
   confirm_password: AbstractControl;
   submitted: Boolean;
 
-  constructor(fb: FormBuilder, public http: Http, public router: Router) {
+  constructor(fb: FormBuilder, public http: Http, public router: Router, public cookieService: CookieService) {
     this.signupForm = fb.group({
       email: ['', Validators.required],
       username: ['', Validators.required],
@@ -47,7 +51,16 @@ export class SignupComponent {
       "email": email
     })
     .subscribe(
-      data => { console.log(data); this.router.navigate(['./userlist']); },
+      data => { 
+        let result = JSON.parse(data.text());
+        console.log("response: ", result);
+        if (result.error) {
+          // show error in this page
+        } else {
+          this.cookieService.setCookie('access-token', result.accessToken, 1);
+          this.router.navigate(['./home']);
+        }
+      },
       err => console.log(err),
       () => console.log('Secret Quote Complete')
     );

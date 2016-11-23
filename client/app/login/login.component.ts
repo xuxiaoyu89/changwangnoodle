@@ -24,7 +24,7 @@ export class LoginComponent {
   http: Http;
 
   constructor(
-    fb: FormBuilder, 
+    fb: FormBuilder,
     http: Http, 
     private cookieService: CookieService,
     private router: Router
