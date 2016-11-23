@@ -13,8 +13,7 @@ export class UserListComponent {
   constructor(private userServcie: UserService) {
     this.ids;
     userServcie.getUsers((err, data) => {
-      console.log("data: ", data._body);
-      this.ids = JSON.parse(data._body).users;
+      this.ids = data.users;
     });
   }
 }

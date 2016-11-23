@@ -41,7 +41,6 @@ export class LoginComponent {
 
   onSubmit(form: any): void {
   	this.submitted = true;
-    console.log("you submitted a form: ", form.controls.password.value);
     let password = form.controls.password.value;
     let username = form.controls.username.value;
 
@@ -53,7 +52,7 @@ export class LoginComponent {
       data => {
         let response = JSON.parse(data.text());
         this.cookieService.setCookie('access-token', response.accessToken, 1);
-        this.router.navigate(['./userlist/user/'+response.id]);
+        this.router.navigate(['./home']);
       },
       err => console.log(err),
       () => console.log('Secret Quote Complete')
