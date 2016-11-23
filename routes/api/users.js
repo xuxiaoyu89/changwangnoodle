@@ -12,7 +12,7 @@ router.get('/users', (req, res) => {
       error: "not logged in"
     });
   } else {
-    token = TokenService.verifyToken(token);
+    token = TokenService.parseToken(token);
 
     if(!token) {
       res.send({

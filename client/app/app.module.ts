@@ -10,6 +10,7 @@ import {LoginComponent} from './login/login.component.ts';
 import {SignupComponent} from './signup/signup.component.ts';
 import {UserListComponent} from './userlist/userlist.component.ts';
 import {UserInfoComponent} from './userinfo/userinfo.component.ts';
+import {HomeComponent} from './home/home.component.ts';
 import {UserService} from './user.service.ts';
 import {CookieService} from './cookie.service.ts';
 
@@ -28,7 +29,8 @@ import {CookieService} from './cookie.service.ts';
   	LoginComponent,
     SignupComponent,
     UserListComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    HomeComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [
