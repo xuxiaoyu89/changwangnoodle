@@ -39,8 +39,18 @@ export class LoginComponent {
     this.http = http;
 
     let accessToken = cookieService.getCookie('access-token');
+    // to do check if the tooken is valid by sending a request to server;
     if (accessToken && accessToken.length > 0) {
-      router.navigate(['./home']);
+      this.http.get('http://localhost:3000/api/token')
+      .subscribe(
+        data => {
+          let response = JSON.parse(data.text());
+          console.log("log in test access token: ", response);
+          if(!response.error) {
+            router.navigate(['./home']);
+          }
+        }
+      )
     }
 
   }
