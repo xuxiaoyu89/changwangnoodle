@@ -6,6 +6,7 @@ const TokenService = require('../../lib/token.js');
 
 router.get('/user', (req, res) => {
   let cookie = req.get('Cookie');
+  console.log('cookie in /user, ', cookie);
   let token = cookieUtil.getKey('access-token', cookie);
   if (!token) {
     res.send({
