@@ -37,6 +37,12 @@ export class LoginComponent {
     this.password = this.loginForm.controls['password'];
     this.submitted = false;
     this.http = http;
+
+    let accessToken = cookieService.getCookie('access-token');
+    if (accessToken && accessToken.length > 0) {
+      router.navigate(['./home']);
+    }
+
   }
 
   onSubmit(form: any): void {

@@ -14,7 +14,11 @@ import {CookieService} from '../cookie.service.ts';
 export class HomeComponent {
   username: string
 
-  constructor (userService: UserService, private router: Router) {
+  constructor (
+    userService: UserService, 
+    private router: Router,
+    private cookieService: CookieService
+    ) {
     userService.getUser((err, data) => {
       console.log('home, getting user');
       if (err) {
@@ -25,5 +29,10 @@ export class HomeComponent {
         this.username = data.username;
       }
     })
+  }
+
+  logout(): void {
+    this.cookieService.deleteCookie('access-token');
+    this.router.navigate(['./login']);
   }
 }
