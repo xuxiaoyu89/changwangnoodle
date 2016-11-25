@@ -18,7 +18,9 @@ router.post('/login', (req, res) => {
         accessToken: token,
       });
     } else {
-      res.status(200).send("failed");
+      res.status(200).send({
+        status: "fail"
+      });
     }
   })
 });

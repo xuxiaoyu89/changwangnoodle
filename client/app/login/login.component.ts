@@ -22,6 +22,7 @@ export class LoginComponent {
   password: AbstractControl;
   submitted: Boolean;
   http: Http;
+  error: String;
 
   constructor(
     fb: FormBuilder,
@@ -67,8 +68,13 @@ export class LoginComponent {
     .subscribe(
       data => {
         let response = JSON.parse(data.text());
-        this.cookieService.setCookie('access-token', response.accessToken, 1);
-        this.router.navigate(['./home']);
+        console.log(response);
+        if (response.status == 'success') {
+          this.cookieService.setCookie('access-token', response.accessToken, 1);
+          this.router.navigate(['./home']);
+        } else {
+          this.error = "incorrect username/password";
+        }         
       },
       err => console.log(err),
       () => console.log('Secret Quote Complete')
