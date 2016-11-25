@@ -2,12 +2,14 @@
 	<input [ngClass]="['text-input']" type="text" name="username" placeholder="username" 
 	onfocus="this.placeholder = ''" 
 	onblur="this.placeholder='username'" 
+	(click)='onChange()'
 	[formControl]="loginForm.controls['username']"
 	/>
 	<br>
 	<input [ngClass]="['text-input']" type="text" name="password" placeholder="password" 
 	onfocus="this.placeholder = ''" 
 	onblur="this.placeholder='password'"
+	(click)='onChange()'
 	[formControl]="loginForm.controls['password']">
 	<br>
 	<input [ngClass]="['button']" type='submit' value="login"/> <br>

@@ -10,6 +10,11 @@ router.post('/login', (req, res) => {
     }
   })
   .then(user => {
+    if (!user) {
+      return res.status(200).send({
+        status: "fail"
+      });
+    }
     data = user.dataValues;
     if (data.password == req.body.password) {
       let token = TokenService.getAccessToken(data.id);

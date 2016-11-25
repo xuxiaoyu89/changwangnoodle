@@ -39,8 +39,13 @@ export class SignupComponent {
   }
 
   onSubmit(form: any): void {
+
   	this.submitted = true;
-    console.log("you submitted a form: ", form.controls.password.value);
+
+    if(form.status === 'INVALID') {
+      return;
+    }
+
     let password = form.controls.password.value;
     let username = form.controls.username.value;
     let email = form.controls.email.value;

@@ -21,12 +21,11 @@ export class LoginComponent {
   username: AbstractControl;
   password: AbstractControl;
   submitted: Boolean;
-  http: Http;
   error: String;
 
   constructor(
     fb: FormBuilder,
-    http: Http, 
+    private http: Http, 
     private cookieService: CookieService,
     private router: Router
     ) {
@@ -37,7 +36,7 @@ export class LoginComponent {
     this.username = this.loginForm.controls['username'];
     this.password = this.loginForm.controls['password'];
     this.submitted = false;
-    this.http = http;
+
 
     let accessToken = cookieService.getCookie('access-token');
     // to do check if the tooken is valid by sending a request to server;
@@ -79,6 +78,10 @@ export class LoginComponent {
       err => console.log(err),
       () => console.log('Secret Quote Complete')
     );
+  }
+
+  onChange() {
+    this.error = '';
   }
 
 }
