@@ -26,7 +26,7 @@ export class HomeComponent {
         router.navigate(['./login'])
       } else {
         console.log(data);
-        this.username = data.username;
+        this.username = data.user.username;
       }
     })
   }
