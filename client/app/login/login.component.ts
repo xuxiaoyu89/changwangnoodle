@@ -69,7 +69,6 @@ export class LoginComponent {
         let response = JSON.parse(data.text());
         console.log(response);
         if (response.status == 'success') {
-          this.cookieService.setCookie('access-token', response.accessToken, 1);
           this.router.navigate(['./home']);
         } else {
           this.error = "incorrect username/password";

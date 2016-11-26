@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/xuxiaoyu89/changwangnoodle#readme",
   "dependencies": {
+    "async": "^2.1.4",
     "body-parser": "^1.15.2",
     "config": "^1.24.0",
     "core-js": "^2.4.1",
