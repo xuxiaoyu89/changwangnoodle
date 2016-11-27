@@ -14,7 +14,7 @@ router.post('/signup', (req, res) => {
     }
   }).spread((userModel, created) => {
     if(created) {
-      console.log('new user created');
+      //console.log('new user created');
       let token = TokenService.getAccessToken(userModel.id);
       res.status(200).send({
         "status": "success",
