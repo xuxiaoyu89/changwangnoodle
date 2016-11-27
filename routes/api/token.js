@@ -24,13 +24,12 @@ router.get('/token', (req, res) => {
     },
     (cb) => {
       if (result.status === 'REFRESH') {
-        //console.log('access token expired, but refresh token is valid');
         TokenService.getAccessToken(result.id, (err, data) => {
           if (err) return cb(err);
           accessToken = data;
           // set res header to set new cookies
-          res.cookie('access-token', accessToken);
-          res.cookie('refresh-token', refreshToken);
+          res.cookie('access-token', accessToken, {encode: String});
+          res.cookie('refresh-token', refreshToken, {encode: String});
           cb();
         })
       }

@@ -10,7 +10,7 @@ router.post('/login', (req, res) => {
   let refreshToken = null;
   async.waterfall([
     (cb) => {
-      console.log('in querying database');
+      //console.log('in querying database');
       models.user.findOne({where: {
         username: req.body.username
       }})

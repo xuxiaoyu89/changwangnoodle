@@ -26,7 +26,6 @@ router.get('/user', (req, res) => {
     },
     (cb) => {
       if (result.status === 'REFRESH') {
-        console.log('access token expired, but refresh token is valid');
         TokenService.getAccessToken(result.id, (err, data) => {
           if (err) return cb(err);
           accessToken = data;
@@ -53,7 +52,6 @@ router.get('/user', (req, res) => {
   ], (err, user) => {
     if (err) res.send({error: err.message});
     else {
-      console.log('sending back user: ', user);
       res.send({user: user});
     }
   });
