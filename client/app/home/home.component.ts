@@ -35,4 +35,9 @@ export class HomeComponent {
     this.cookieService.deleteCookie('access-token');
     this.router.navigate(['./login']);
   }
+
+  onChange(event) {
+    let file = event.target.files[0];
+    console.log(file);
+  }
 }
