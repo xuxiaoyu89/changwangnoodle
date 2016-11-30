@@ -5,5 +5,11 @@
     "DB_NAME": "user",
     "DB_HOST": "127.0.0.1",
     "DB_DIALECT": "mysql"
+  },
+  "aws": {
+  	"s3": {
+  		"publicUrl": "https://s3-us-west-2.amazonaws.com",
+  		"bucket": "changwangnoodle"
+  	}
   }
 }

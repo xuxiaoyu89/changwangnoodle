@@ -39,5 +39,20 @@ export class HomeComponent {
   onChange(event) {
     let file = event.target.files[0];
     console.log(file);
+    this.uploadFile(file);
   }
+
+
+  uploadFile(file) {
+    
+  }
+
+
+
+
+
+
+
+
+
 }
