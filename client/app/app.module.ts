@@ -12,6 +12,7 @@ import {UserListComponent} from './userlist/userlist.component.ts';
 import {UserInfoComponent} from './userinfo/userinfo.component.ts';
 import {HomeComponent} from './home/home.component.ts';
 import {UserService} from './user.service.ts';
+import {FileService} from './file.service.ts';
 import {CookieService} from './cookie.service.ts';
 
 
