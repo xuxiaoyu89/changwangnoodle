@@ -19,7 +19,7 @@ export class HomeComponent {
     userService: UserService, 
     private router: Router,
     private cookieService: CookieService,
-    private fileUploaderService: FileService,
+    private fileService: FileService,
     private http: Http
     ) {
     userService.getUser((err, data) => {
@@ -42,7 +42,7 @@ export class HomeComponent {
   onChange(event) {
     let file = event.target.files[0];
     console.log(file);
-    this.fileUploaderService.uploadFile(file, (err, response) => {
+    this.fileService.uploadFile(file, (err, response) => {
       if (err) {
         console.log("err in upload file");
       } else {
