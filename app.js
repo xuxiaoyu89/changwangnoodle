@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(multer({ dest: './uploads/'}).single('file'));
+/*app.use(multer({ dest: './uploads/'}).single(''));*/
 
 app.use('/', index);
 

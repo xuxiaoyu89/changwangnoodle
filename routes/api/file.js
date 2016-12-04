@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const multer  = require('multer');
 
-router.post('/file', (req, res) => {
-  console.log(req.body); // form fields
-  console.log(req.files); // form files
-  res.status(204).end();
+//app.use(multer({ dest: './uploads/'}).single('file'));
+
+router.post('/file', multer({ dest: './uploads/'}).single('file'), (req, res) => {
+  console.log(req.file);
+  res.status(200).send("File received successfully");
 });
 
 module.exports = router;
