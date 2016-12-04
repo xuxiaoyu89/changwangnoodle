@@ -6,7 +6,8 @@ export class FileService {
   constructor (public http: Http) {}
 
   uploadFile(file, callback) {
-    this.http.post('http://localhost:3000/api/file', {"data": "fake file"})
+    //console.log('file: ', file);
+    /*this.http.post('http://localhost:3000/api/file', {"data": file})
     .subscribe(
       data => { 
         callback(null, data);
@@ -14,6 +15,23 @@ export class FileService {
       err => {
         callback(err);
       }
-    )
+    )*/
+
+    var xhr = new XMLHttpRequest();
+    var formData = new FormData();
+    var endpoint = 'http://localhost:3000/api/file';
+
+
+    formData.append('file', file);
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          callback(null, xhr.response);
+        }
+      }
+    }
+
+    xhr.open('POST', endpoint, true);
+    xhr.send(formData);
   }
 }

@@ -1,6 +1,7 @@
 let express = require('express');
 var path = require('path');
 let app = express();
+let multer  = require('multer');
 let index = require('./routes/index');
 let bodyParser = require('body-parser');
 let config = require('config');
@@ -16,11 +17,10 @@ app.use(express.static('client'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer({ dest: './uploads/'}).single('file'));
 
 app.use('/', index);
 
