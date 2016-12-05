@@ -19,7 +19,7 @@ export class FileService {
 
     var xhr = new XMLHttpRequest();
     var formData = new FormData();
-    var endpoint = 'http://localhost:3000/api/file';
+    var endpoint = 'http://localhost:3000/api/upload-direct';
 
 
     formData.append('file', file);
