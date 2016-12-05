@@ -15,7 +15,7 @@ router.get('/upload-s3', (req, res) => {
   const s3 = new AWS.S3();
   console.log('get a request in upload-s3');
   let fileName = req.query['file-name'];
-  let fileType = req.query['query-type'];
+  let fileType = req.query['file-type'];
   const s3Params = {
     Bucket: s3Config.bucket,
     Key: fileName,
@@ -28,6 +28,7 @@ router.get('/upload-s3', (req, res) => {
       console.log(err);
       return res.end();
     }
+    console.log('signedRequest: ', data);
     const returnData = {
       signedRequest: data,
       url: `https://${s3Config.bucket}.s3.amazonaws.com/${fileName}`
