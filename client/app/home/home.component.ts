@@ -42,7 +42,7 @@ export class HomeComponent {
   onChange(event) {
     let file = event.target.files[0];
     console.log(file);
-    this.fileService.uploadFile(file, (err, response) => {
+    this.getSignedRequest(file, (err, response) => {
       if (err) {
         console.log("err in upload file");
       } else {
@@ -51,7 +51,59 @@ export class HomeComponent {
     });
   }
 
-
-  uploadFile(file) {
+  getSignedRequest(file, callback): void {
+    console.log('in getSignedRequest');
+    const xhr = new XMLHttpRequest();
+    let name = encodeURIComponent(file.name);
+    let type = encodeURIComponent(file.type);
+    let url = `http://localhost:3000/api/upload-s3/?file-name=${name}&file-type=${type}`;
+    console.log(url);
+    xhr.open('GET', url);
+    xhr.onreadystatechange = () => {
+      console.log(xhr.readyState);
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          const response = JSON.parse(xhr.responseText);
+          this.uploadFileToS3(file, response.signedRequest, response.url, callback);
+        }
+        else {
+          console.log('fail to get signed request');
+          callback(new Error('fail to get signed request'));
+        }
+      }
+    }
+    xhr.send();
   }
+
+  uploadFileToS3(file, signedRequest, url, callback) {
+    console.log('in uploadfiletos3');
+    const xhr = new XMLHttpRequest();
+    xhr.open('PUT', signedRequest);
+    xhr.onreadystatechange = () => {
+      if(xhr.readyState === 4){
+        if(xhr.status === 200){
+          /*document.getElementById('preview').src = url;
+          document.getElementById('avatar-url').value = url;*/
+          console.log('upload to S3 success');
+          callback();
+        }
+        else{
+          console.log('Could not upload file.');
+          callback(new Error("Cannot upload file"));
+        }
+      }
+    };
+    xhr.send(file);
+  }
+
+
+
+
+
+
+
+
+
+
+
 }
