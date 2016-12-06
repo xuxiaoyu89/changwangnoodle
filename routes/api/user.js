@@ -3,6 +3,7 @@ const router = express.Router();
 const async = require('async');
 const models = require('../../models');
 const cookieUtil = require('../../lib/util/cookie.js');
+const fileUtil = require('../../lib/util/file.js');
 const TokenService = require('../../lib/token.js');
 
 /*
@@ -56,5 +57,17 @@ router.get('/user', (req, res) => {
     }
   });
 });
+
+
+router.put('user/updateAvatar', (req, res) => {
+  let fileName = req.query['file-name'];
+  let fileType = req.query['file-type'];
+  fileUtil.getS3SignedUrl(fileName, fileType, (err, data) => {
+    if (err) return res.status(500).send('cannot get signed url');
+    return res.send(data);
+  })
+
+});
+
 
 module.exports = router;
