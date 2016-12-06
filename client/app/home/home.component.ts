@@ -54,7 +54,7 @@ export class HomeComponent {
   getSignedRequest(file, callback): void {
     console.log('in getSignedRequest');
     const xhr = new XMLHttpRequest();
-    let name = encodeURIComponent(file.name);
+    let name = 'avatar/' + encodeURIComponent(file.name);
     let type = encodeURIComponent(file.type);
     let url = `http://localhost:3000/api/upload-s3/?file-name=${name}&file-type=${type}`;
     console.log(url);
@@ -83,7 +83,7 @@ export class HomeComponent {
     xhr.onreadystatechange = () => {
       if(xhr.readyState === 4){
         if(xhr.status === 200){
-          document.getElementById('avatar').src = url;
+          (<HTMLImageElement>document.getElementById('avatar')).src = url;
           console.log('upload to S3 success');
           callback();
         }
@@ -97,20 +97,4 @@ export class HomeComponent {
     };
     xhr.send(file);
   }
-
-
-/*
-
-SignatureDoesNotMatch</Code><Message>The request signature we calculated does not match the signature you provided. Check your key and signing method.</Message><AWSAccessKeyId>AKIAJHBPKBNG6TJNNNQA</AWSAccessKeyId><StringToSign>PUT↵↵image/jpeg↵1480910906↵x-amz-acl:public-read↵/changwangnoodle/IMG_4292.JPG</StringToSign><SignatureProvided>VUhk/KpM+B43rT/9RxA0Q3spixg=</SignatureProvided><StringToSignBytes>50 55 54 0a 0a 69 6d 61 67 65 2f 6a 70 65 67 0a 31 34 38 30 39 31 30 39 30 36 0a 78 2d 61 6d 7a 2d 61 63 6c 3a 70 75 62 6c 69 63 2d 72 65 61 64 0a 2f 63 68 61 6e 67 77 61 6e 67 6e 6f 6f 64 6c 65 2f 49 4d 47 5f 34 32 39 32 2e 4a 50 47</StringToSignBytes><RequestId>B443D94360FBFEA6</RequestId><HostId>qDrFGqLiFZjwbeYRkrm3BH+h2HYMR3OXKqp9f9xKdO6gLGWhaJiEMNyyMsfueJ2qH7sFdMU7S14=</HostId></Error>"
-
-
-*/
-
-
-
-
-
-
-
-
 }
