@@ -11,6 +11,7 @@ import {SignupComponent} from './signup/signup.component.ts';
 import {UserListComponent} from './userlist/userlist.component.ts';
 import {UserInfoComponent} from './userinfo/userinfo.component.ts';
 import {HomeComponent} from './home/home.component.ts';
+import {FileUploaderComponent} from './file-uploader/file-uploader.component.ts';
 import {UserService} from './user.service.ts';
 import {FileService} from './file.service.ts';
 import {CookieService} from './cookie.service.ts';
@@ -31,7 +32,8 @@ import {CookieService} from './cookie.service.ts';
     SignupComponent,
     UserListComponent,
     UserInfoComponent,
-    HomeComponent
+    HomeComponent,
+    FileUploaderComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [
