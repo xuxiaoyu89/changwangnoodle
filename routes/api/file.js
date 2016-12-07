@@ -3,6 +3,7 @@ const router = express.Router();
 const multer  = require('multer');
 const AWS = require('aws-sdk');
 const s3Config = require('config').aws.s3;
+const middlewares = require('../../lib/middlewares.js');
 
 //app.use(multer({ dest: './uploads/'}).single('file'));
 
@@ -10,6 +11,8 @@ router.post('/upload-direct', multer({ dest: './uploads/'}).single('file'), (req
   console.log(req.file);
   res.status(200).send("File received successfully");
 });
+
+/*router.use('/upload-s3', middlewares.validateRequest);
 
 router.get('/upload-s3', (req, res) => {
   const s3 = new AWS.S3();
@@ -37,5 +40,5 @@ router.get('/upload-s3', (req, res) => {
     res.end();
   });
 });
-
+*/
 module.exports = router;

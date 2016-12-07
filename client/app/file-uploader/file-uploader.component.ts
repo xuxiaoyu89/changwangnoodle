@@ -36,7 +36,7 @@ export class FileUploaderComponent {
     const xhr = new XMLHttpRequest();
     let name = 'avatar/' + encodeURIComponent(file.name);
     let type = encodeURIComponent(file.type);
-    let url = `http://localhost:3000/api/upload-s3/?file-name=${name}&file-type=${type}`;
+    let url = `http://localhost:3000/api/user/updateAvatar/?file-name=${name}&file-type=${type}`;
     console.log(url);
     xhr.open('GET', url);
     xhr.onreadystatechange = () => {
