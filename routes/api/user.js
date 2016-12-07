@@ -5,6 +5,7 @@ const models = require('../../models');
 const cookieUtil = require('../../lib/util/cookie.js');
 const fileUtil = require('../../lib/util/file.js');
 const TokenService = require('../../lib/token.js');
+const middlewares = require('../../lib/middlewares.js');
 
 /*
  * return value: 
@@ -59,14 +60,42 @@ router.get('/user', (req, res) => {
 });
 
 
-router.put('user/updateAvatar', (req, res) => {
+router.use('/user/updateAvatar', middlewares.validateRequest);
+router.get('/user/updateAvatar', (req, res) => {
+  let userId = req.info.id;
   let fileName = req.query['file-name'];
   let fileType = req.query['file-type'];
-  fileUtil.getS3SignedUrl(fileName, fileType, (err, data) => {
-    if (err) return res.status(500).send('cannot get signed url');
-    return res.send(data);
-  })
+  let url = null;
+  let signedRequest = null;
 
+  async.waterfall([
+    cb => {
+      fileUtil.getS3UrlAndSignedRequest(fileName, fileType, (err, data) => {
+        if (err) return cb(err);
+        url = data.url;
+        signedRequest = data.signedRequest;
+        return cb();
+      })
+    },
+    cb => {
+      models.user.findById(userId)
+      .then(
+      (user) => {
+        user.updateAttributes({'avatar':url});
+        cb();
+      }, 
+      (err) => {
+        cb(new Error(`cannot get id ${id} from database`));
+      });
+    }
+  ], err => {
+    if (err) return res.send({"status": "error", "message": "cannot update avatar"});
+    res.send({
+      "status": "success",
+      "url": url,
+      "signedRequest": signedRequest
+    });
+  })
 });
 
 
