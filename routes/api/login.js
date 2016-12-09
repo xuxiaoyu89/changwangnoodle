@@ -58,8 +58,14 @@ router.post('/login', (req, res) => {
     if (err) return res.send({error: err});
     else {
       //console.log("in login, accessToken: ", accessToken);
-      res.cookie('access-token', accessToken, {encode: String});
-      res.cookie('refresh-token', refreshToken, {encode: String});
+      res.cookie('access-token', accessToken, {
+        expires: new Date(Date.now() + 30*24*3600*1000), 
+        encode: String
+      });
+      res.cookie('refresh-token', refreshToken, {
+        expires: new Date(Date.now() + 30*24*3600*1000), 
+        encode: String
+      });
       //console.log('sending back response with token');
       res.status(200).send({status: 'success'});
     }

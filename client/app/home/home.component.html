@@ -1,8 +1,10 @@
 <img id='avatar' src="{{avatar}}">
 
+<div *ngIf='noAvatar'>
+	<file-uploader></file-uploader>
+</div>
+<br>
 {{username}} <br>
 <a (click)="logout()">logout</a> <br>
-
-<file-uploader></file-uploader>
 
 <router-outlet></router-outlet>

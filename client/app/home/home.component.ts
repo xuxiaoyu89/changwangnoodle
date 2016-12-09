@@ -15,6 +15,7 @@ import {FileService} from '../file.service.ts';
 export class HomeComponent {
   username: string
   avatar: string
+  noAvatar: boolean
 
   constructor (
     userService: UserService, 
@@ -30,6 +31,7 @@ export class HomeComponent {
       } else {
         this.username = data.user.username;
         this.avatar = data.user.avatar;
+        this.noAvatar = false;
       }
     })
   }
