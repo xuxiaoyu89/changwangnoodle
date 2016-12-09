@@ -1,7 +1,17 @@
 'use strict';
 
 module.exports = function (sequelize, DataTypes) {
-  let model = sequelize.define('user', {
+
+  function findOrCreateWithEmail(email) {
+    return User.findOrCreate({
+      where: {
+        email: email
+      },
+      default: {}
+    });
+  }
+
+  let User = sequelize.define('user', {
     username: DataTypes.STRING(256),
     password: DataTypes.STRING(256),
     email: DataTypes.STRING(256),
@@ -13,5 +23,5 @@ module.exports = function (sequelize, DataTypes) {
     timestamps: false
   });
 
-  return model;
+  return User;
 };

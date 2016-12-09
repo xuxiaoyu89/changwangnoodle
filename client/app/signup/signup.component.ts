@@ -40,6 +40,8 @@ export class SignupComponent {
 
   onSubmit(form: any): void {
 
+    console.log('on submit');
+
   	this.submitted = true;
 
     if(form.status === 'INVALID') {
@@ -62,7 +64,6 @@ export class SignupComponent {
         if (result.error) {
           // show error in this page
         } else {
-          this.cookieService.setCookie('access-token', result.accessToken, 1);
           this.router.navigate(['./home']);
         }
       },
