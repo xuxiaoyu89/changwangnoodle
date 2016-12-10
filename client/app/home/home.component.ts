@@ -25,13 +25,16 @@ export class HomeComponent {
     private http: Http
     ) {
     userService.getUser((err, data) => {
-      this.avatar = 'https://s3-us-west-2.amazonaws.com/changwangnoodle/images/default-placeholder.png';
       if (err) {
         router.navigate(['./login'])
       } else {
         this.username = data.user.username;
         this.avatar = data.user.avatar;
         this.noAvatar = false;
+        if (!this.avatar) {
+          this.avatar = 'https://s3-us-west-2.amazonaws.com/changwangnoodle/images/default-placeholder.png';
+          this.noAvatar = true;
+        }
       }
     })
   }
