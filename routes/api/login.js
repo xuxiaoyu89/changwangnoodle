@@ -17,10 +17,13 @@ router.post('/login', (req, res) => {
       .then(
         userModel => {
           user = userModel;
-          cb();
+          if (!user) {
+            return cb(new Error('No user found'));
+          }
+          return cb();
         },
         err => {
-          cb(err);
+          return cb(err);
         }
       )
     },
