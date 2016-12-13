@@ -20,5 +20,15 @@ export class ModalComponent {
     private viewContainer: ViewContainerRef
   ) {}
 
-  
+  isModalOpen() {
+    if (this.modal.modalOpenState && this.modal.component === null) {
+      open();
+    }
+    return this.modal.modalOpenState;
+  }
+
+  open() {
+    let component = this.modal.component;
+    this.content.createComponent(component)
+  }
 }
