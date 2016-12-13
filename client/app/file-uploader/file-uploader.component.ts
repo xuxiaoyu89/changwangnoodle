@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver, ElementRef, ViewChild } from '@angular/core';
+import {ImageEditorComponent} from './image-editor/image-editor.component.ts';
+import {ModalService} from './modal/modal.service.ts';
 import {Http, Response} from '@angular/http';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {UserService} from '../user.service.ts';
@@ -13,22 +15,47 @@ import {FileService} from '../file.service.ts';
 })
 
 export class FileUploaderComponent {
+  private file;
   constructor (
     private cookieService: CookieService,
     private fileService: FileService,
-    private http: Http
+    private http: Http,
+    private modal: ModalService,
+    private componentFactoryResolver: ComponentFactoryResolver
     ) {}
 
-  onChange(event) {
-    let file = event.target.files[0];
-    console.log(file);
-    this.getSignedRequest(file, (err, response) => {
-      if (err) {
-        console.log("err in upload file");
-      } else {
-        console.log("response: ", response);
-      }
-    });
+
+  ngOnInit() {
+    let dropbox = document.getElementById('dropbox');
+    dropbox.addEventListener('dragenter', this.onDragEnter, false);
+    dropbox.addEventListener('dragover', this.onDragOver, false);
+    dropbox.addEventListener('drop', this.onDrop, false);
+    console.log("on init, drop listener added");
+  }
+
+  onDragEnter(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  onDragOver(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+
+  onDrop(e) {
+    console.log('dropped something');
+    e.stopPropagation();
+    e.preventDefault();
+    let dt = e.dataTransfer;
+    let files = dt.files;
+    this.file = files[0];
+  }
+
+  setModalData() {
+    let component, data;
+    component = this.componentFactoryResolver.resolveComponentFactory(ImageEditorComponent);
+    this.modal.setModalProperties(component, data);
   }
 
   getSignedRequest(file, callback): void {
