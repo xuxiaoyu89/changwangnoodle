@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, ElementRef, ViewChild } from '@angular/core';
-import {ImageEditorComponent} from './image-editor/image-editor.component.ts';
-import {ModalService} from './modal/modal.service.ts';
+import {ImageEditorComponent} from '../image-editor/image-editor.component.ts';
+import {ModalService} from '../modal/modal.service.ts';
 import {Http, Response} from '@angular/http';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {UserService} from '../user.service.ts';
@@ -11,7 +11,8 @@ import {FileService} from '../file.service.ts';
   selector: 'file-uploader',
   template: require('./file-uploader.component.html'),
   styles: [require('./file-uploader.component.scss')],
-  providers: [UserService, CookieService, FileService]
+  providers: [UserService, CookieService, FileService, ModalService],
+  entryComponents: [ImageEditorComponent]
 })
 
 export class FileUploaderComponent {
@@ -50,6 +51,7 @@ export class FileUploaderComponent {
     let dt = e.dataTransfer;
     let files = dt.files;
     this.file = files[0];
+    this.setModalData();
   }
 
   setModalData() {

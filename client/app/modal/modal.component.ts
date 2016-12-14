@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, Inject, ViewChild, ViewContainerRef} from '@angular/core';
-import {ModalService} from './modal.service';
+import {ModalService} from './modal.service.ts';
 import {DOCUMENT} from '@angular/platform-browser';
 
 @Component({
@@ -7,11 +7,8 @@ import {DOCUMENT} from '@angular/platform-browser';
   template: require('./modal.component.html'),
   styles: [require('./modal.component.scss')]
 })
-
 export class ModalComponent {
   @ViewChild('content', {read: ViewContainerRef}) content: ViewContainerRef;
-
-
 
   constructor(
     @Inject(DOCUMENT) private document,
