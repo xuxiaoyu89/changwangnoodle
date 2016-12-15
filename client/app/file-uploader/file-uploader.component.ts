@@ -32,6 +32,10 @@ export class FileUploaderComponent {
     dropbox.addEventListener('dragover', this.onDragOver, false);
     dropbox.addEventListener('drop', this.onDrop, false);
     console.log("on init, drop listener added");
+    console.log("in init, ", this.componentFactoryResolver);
+    let component, data;
+    component = this.componentFactoryResolver.resolveComponentFactory(ImageEditorComponent);
+    this.modal.setModalProperties(component, data);
   }
 
   onDragEnter(e) {
@@ -45,13 +49,16 @@ export class FileUploaderComponent {
   }
 
   onDrop(e) {
+    console.log(this.componentFactoryResolver);
     console.log('dropped something');
     e.stopPropagation();
     e.preventDefault();
     let dt = e.dataTransfer;
     let files = dt.files;
     this.file = files[0];
-    this.setModalData();
+    let component, data;
+    component = this.componentFactoryResolver.resolveComponentFactory(ImageEditorComponent);
+    this.modal.setModalProperties(component, data);
   }
 
   setModalData() {
