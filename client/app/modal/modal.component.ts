@@ -24,6 +24,10 @@ export class ModalComponent {
     return this.modal.modalOpenState;
   }
 
+  setContentHeight() {
+    console.log("content size changed");
+  }
+
   open() {
     let component = this.modal.component;
     this.content.createComponent(component)

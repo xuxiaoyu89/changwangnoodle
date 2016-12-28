@@ -28,14 +28,6 @@ export class FileUploaderComponent {
 
   ngOnInit() {
     let dropbox = document.getElementById('dropbox');
-    dropbox.addEventListener('dragenter', this.onDragEnter, false);
-    dropbox.addEventListener('dragover', this.onDragOver, false);
-    dropbox.addEventListener('drop', this.onDrop, false);
-    console.log("on init, drop listener added");
-    console.log("in init, ", this.componentFactoryResolver);
-    let component, data;
-    component = this.componentFactoryResolver.resolveComponentFactory(ImageEditorComponent);
-    this.modal.setModalProperties(component, data);
   }
 
   onDragEnter(e) {
@@ -49,8 +41,6 @@ export class FileUploaderComponent {
   }
 
   onDrop(e) {
-    console.log(this.componentFactoryResolver);
-    console.log('dropped something');
     e.stopPropagation();
     e.preventDefault();
     let dt = e.dataTransfer;
@@ -58,12 +48,7 @@ export class FileUploaderComponent {
     this.file = files[0];
     let component, data;
     component = this.componentFactoryResolver.resolveComponentFactory(ImageEditorComponent);
-    this.modal.setModalProperties(component, data);
-  }
-
-  setModalData() {
-    let component, data;
-    component = this.componentFactoryResolver.resolveComponentFactory(ImageEditorComponent);
+    console.log(component);
     this.modal.setModalProperties(component, data);
   }
 
