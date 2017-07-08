@@ -11,14 +11,25 @@ export class ModalComponent {
   @ViewChild('content', {read: ViewContainerRef}) content: ViewContainerRef;
 
   constructor(
-    @Inject(DOCUMENT) private document,
     private elementRef: ElementRef,
     private modal: ModalService,
     private viewContainer: ViewContainerRef
-  ) {}
+  ) {
+
+    console.log('xiaoyu - in ModalComponent constructor - 1: ', this.modal);
+    this.modal.setOpenFunction(() => {
+      /*
+      this.modal.currentComponent = this.modal.modalData['component'];
+      this.open(this.modal.modalData['component'], this.modal.modalData['data'], this.modal.injector);
+      */
+      console.log('xiaoyu - in ModalComponent constructor: ', this.modal);
+
+      this.open(this.modal.currentComponent, null, null);
+    });
+  }
 
   isModalOpen() {
-    if (this.modal.modalOpenState && this.modal.component === null) {
+    if (this.modal.modalOpenState && this.modal.currentComponent === null) {
       open();
     }
     return this.modal.modalOpenState;
@@ -28,8 +39,17 @@ export class ModalComponent {
     console.log("content size changed");
   }
 
-  open() {
-    let component = this.modal.component;
-    this.content.createComponent(component)
+  open(component, data, injector): void {
+    this.content.createComponent(component, undefined, injector);
+
+    // hide overflow on page once modal is open
+    /*let classList = this.document.getElementsByTagName('body')[0].classList;
+    classList.add(this.OVERFLOW_CLASS);
+
+    each( keys(data), (key) => {
+      resolverRef.instance[key] = data[key];
+    });
+    resolverRef.instance['closeModal'] = this.close.bind(this);
+    resolverRef.instance['closeOverride'] = this.closeOverride.bind(this);*/
   }
 }

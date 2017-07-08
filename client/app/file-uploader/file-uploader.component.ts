@@ -11,7 +11,7 @@ import {FileService} from '../file.service.ts';
   selector: 'file-uploader',
   template: require('./file-uploader.component.html'),
   styles: [require('./file-uploader.component.scss')],
-  providers: [UserService, CookieService, FileService, ModalService],
+  providers: [UserService, CookieService, FileService],
   entryComponents: [ImageEditorComponent]
 })
 

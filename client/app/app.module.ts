@@ -42,7 +42,8 @@ import {ModalService} from './modal/modal.service.ts';
   ],
   bootstrap: [ AppComponent ],
   providers: [
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    ModalService
   ]
 })
 export class AppModule { }
